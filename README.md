@@ -6,6 +6,6 @@ Implementations of algorithms from http://quantumalgorithmzoo.org/
 | Algorithm | Speedup | Implementations |   |
 |-----------|---------|-----------------|---|
 | Factoring |   Superpolynomial      |   [Q#](/src/qsharp/factoring)     |   |
-|           |         |                 |   |
+| Bernstein-Vazirani |   Polynomial Directly, Superpolynomial Recursively |    [Q#](/src/qsharp/bernstein-vazirani) |   |
 |           |         |                 |   |
 |           |         |                 |   |
