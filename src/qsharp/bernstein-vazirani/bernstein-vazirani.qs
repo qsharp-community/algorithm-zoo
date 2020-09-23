@@ -1,8 +1,11 @@
 namespace BernsteinVazirani {
+    open Microsoft.Quantum.Convert;
+    open Microsoft.Quantum.Math;
     open Microsoft.Quantum.Intrinsic;
     open Microsoft.Quantum.Canon;
     open Microsoft.Quantum.Diagnostics;
     open Microsoft.Quantum.Arithmetic;
+    open Microsoft.Quantum.Arrays;
 
 
     @EntryPoint()
@@ -18,7 +21,7 @@ namespace BernsteinVazirani {
     ) : Int {
         using ((queryRegister, target) = (Qubit[n], Qubit())) {
             within {
-                ApplyToEach(H, queryRegister);
+                ApplyToEachCA(H, queryRegister);
                 X(target);
                 H(target); 
                 //After these steps the registers are: |+++++..++>|->
@@ -34,7 +37,7 @@ namespace BernsteinVazirani {
         Fact(Length(x)>=BitSizeI(s), "The query register is not big enough to hold the secret.");
 
         let secretString = IntAsBoolArray(s, Length(x));
-        ApplyToEach(CControlled(CNOT(_,target)), Zip(secretString, x));
+        ApplyToEachCA(CControlledCA(CNOT(_,target)), Zip(secretString, x));
     }
 
     function DotProductOracle(s : Int) : ((Qubit[],Qubit) => Unit is Adj + Ctl) {
