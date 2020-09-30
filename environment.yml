@@ -1,0 +1,13 @@
+name: qsharpcommunity-zoo
+channels:
+- conda-forge
+- quantum-engineering 
+dependencies:
+- notebook
+- numpy
+- ipykernel
+- qsharp==0.12.20092803
+- pip
+- matplotlib
+- pip:
+  - RISE

@@ -1,0 +1,12 @@
+{
+    "dockerFile": "../Dockerfile",
+    "extensions": [
+        "quantum.quantum-devkit-vscode",
+        "ms-vscode.csharp",
+        "editorconfig.editorconfig",
+        "ms-python.python"
+    ],
+    "remoteEnv": {
+        "IQSHARP_HOSTING_ENV": "QAZOO_DEVCONTAINER"
+    }
+}
