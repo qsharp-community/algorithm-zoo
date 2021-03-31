@@ -19,17 +19,17 @@ namespace BernsteinVazirani {
         oracle : ((Qubit[],Qubit) => Unit is Adj + Ctl),
         n : Int
     ) : Int {
-        using ((queryRegister, target) = (Qubit[n], Qubit())) {
-            within {
-                ApplyToEachCA(H, queryRegister);
-                X(target);
-                H(target); 
-                //After these steps the registers are: |+++++..++>|->
-            } apply {
-                oracle(queryRegister, target);
-            }
-            return MeasureInteger(LittleEndian(queryRegister));
+        use queryRegister = Qubit[n];
+        use target =  Qubit();
+        within {
+            ApplyToEachCA(H, queryRegister);
+            X(target);
+            H(target); 
+            //After these steps the registers are: |+++++..++>|->
+        } apply {
+            oracle(queryRegister, target);
         }
+        return MeasureInteger(LittleEndian(queryRegister));
     }
 
     operation ApplyDotProductOracle(s : Int, x : Qubit[], target : Qubit) 

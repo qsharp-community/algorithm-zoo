@@ -90,19 +90,19 @@ namespace Factoring {
         bitSize : Int, 
         oracle : ((Int, Qubit[]) => Unit is Adj+Ctl)
     ) : Int {
-        using (register = Qubit[bitSize]) {
-            let registerLE = LittleEndian(register);
-            ApplyXorInPlace(1, registerLE);
+        use register = Qubit[bitSize];
 
-            let phase = RobustPhaseEstimation(
-                nBitsPrecision,
-                DiscreteOracle(oracle),
-                registerLE!
-            );
-            ResetAll(register);
+        let registerLE = LittleEndian(register);
+        ApplyXorInPlace(1, registerLE);
 
-            return Round((phase * IntAsDouble(2 ^ nBitsPrecision))/(2.0 * PI()));
-        }  
+        let phase = RobustPhaseEstimation(
+            nBitsPrecision,
+            DiscreteOracle(oracle),
+            registerLE!
+        );
+        ResetAll(register);
+
+        return Round((phase * IntAsDouble(2 ^ nBitsPrecision))/(2.0 * PI())); 
     }
 
     operation ApplyPeriodFindingOracle(
