@@ -39,8 +39,11 @@
     operation ApplyW(target : Qubit[], numCoins : Int) : Unit
     is Adj + Ctl {
         //Generate list of all integers up to N
-        let QEven = Filtered(Compose(EqualI(0, _), Parity), 
-            RangeAsIntArray(0..numCoins));
+        //let QEven = Filtered(Compose(EqualI(0, _), Parity), 
+        //    RangeAsIntArray(0..numCoins));
+
+        ApplyToEachCA(H, Most(target));
+        ApplyToEachCA(CNOT(Tail(target), _), Most(target));
         
     }
 }
