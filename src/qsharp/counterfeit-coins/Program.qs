@@ -11,13 +11,8 @@
 /// N coin total in the bag, k coins are counterfeit.
 /// https://arxiv.org/pdf/1009.0416.pdf
 ///
-
     @EntryPoint()
-    operation HelloQ() : Unit {
-        Message("Hello quantum world!");
-    }
-
-    operation FindCounterfeits(numCoins : Int) : Int {
+    operation FindCounterfeits(numCoins : Int, numCounterfeit : Int) : Int {
         //1. Setup register
         use register1 = Qubit[numCoins];
         // Apply W
@@ -41,10 +36,20 @@
         //Generate list of all integers up to N
         //let QEven = Filtered(Compose(EqualI(0, _), Parity), 
         //    RangeAsIntArray(0..numCoins));
+        let most = Most(target);
+        ApplyToEachCA(H, most);
+        // |uniform⟩|0⟩
+        ApplyToEachCA(CNOT(Tail(target), _), most);
+        // 
+    }
 
-        ApplyToEachCA(H, Most(target));
-        ApplyToEachCA(CNOT(Tail(target), _), Most(target));
-        
+    operation ApplyR(
+        control : Qubit[], 
+        target : LittleEndian) 
+    : Unit is Adj + Ctl {
+        // R |i_0, i_1, i_2,..i_N⟩|0⟩ - > |i⟩|wt(i)⟩
+        // wt() =  the number of 1's in your bitstring
+        let arrayControl = Mapped(ConstantArray<Qubit>(1, _), control);
+        ApplyToEachCA((Controlled IncrementByInteger)(_ ,(1, target)) , arrayControl);
     }
 }
-
