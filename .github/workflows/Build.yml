@@ -10,3 +10,4 @@ jobs:
     - uses: actions/checkout@v2
     - name: .NET build
       run: dotnet build
+      working-directory: .
