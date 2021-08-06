@@ -29,14 +29,13 @@ namespace Searching {
         oracle : ((Qubit[], Qubit) => Unit is Adj), 
         nItems : Int
     ) : Int {
-        using (inputRegister = Qubit[BitSizeI(nItems)]) {
-            ApplyToEach(H, inputRegister);
-            for (n in 0..nIterations(BitSizeI(nItems)) - 1) {
-                ReflectAboutMarked(oracle, inputRegister);
-                ReflectAboutUniform(inputRegister);
-            }
-            return MeasureInteger(LittleEndian(inputRegister));
+        use inputRegister = Qubit[BitSizeI(nItems)];
+        ApplyToEach(H, inputRegister);
+        for n in 0..nIterations(BitSizeI(nItems)) - 1 {
+            ReflectAboutMarked(oracle, inputRegister);
+            ReflectAboutUniform(inputRegister);
         }
+        return MeasureInteger(LittleEndian(inputRegister));
     }
 
     operation PrepareAllOnes(register : Qubit[]) : Unit
@@ -63,13 +62,12 @@ namespace Searching {
         oracle : ((Qubit[], Qubit) => Unit is Adj), 
         register : Qubit[]
     ) : Unit is Adj {
-        using( output = Qubit()) {
-            within {
-                X(output);
-                H(output);
-            } apply {
-                oracle(register, output);
-            }
+        use output = Qubit();
+        within {
+            X(output);
+            H(output);
+        } apply {
+            oracle(register, output);
         }
     }
 

@@ -37,7 +37,7 @@ namespace BernsteinVazirani {
         Fact(Length(x)>=BitSizeI(s), "The query register is not big enough to hold the secret.");
 
         let secretString = IntAsBoolArray(s, Length(x));
-        ApplyToEachCA(CControlledCA(CNOT(_,target)), Zip(secretString, x));
+        ApplyToEachCA(CControlledCA(CNOT(_,target)), Zipped(secretString, x));
     }
 
     function DotProductOracle(s : Int) : ((Qubit[],Qubit) => Unit is Adj + Ctl) {

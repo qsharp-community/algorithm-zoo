@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "factoring", "src\qsharp\fac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "searching", "src\qsharp\searching\searching.csproj", "{E1B97B73-E2B1-4E5A-8065-F93599EA6754}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D9631C98-007F-4A0C-8B2D-180F349F8D40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{11C7B1CB-EE4F-44E7-B37A-4C30057C0C20} = {D9631C98-007F-4A0C-8B2D-180F349F8D40}
+		{E0DF621D-27EF-4611-BAA8-4DF0BDC64144} = {D9631C98-007F-4A0C-8B2D-180F349F8D40}
+		{E1B97B73-E2B1-4E5A-8065-F93599EA6754} = {D9631C98-007F-4A0C-8B2D-180F349F8D40}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F86B2E51-3C9A-43FA-A8B2-AD115487FC0B}
